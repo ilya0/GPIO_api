@@ -12,6 +12,7 @@ GPIO.setup(LEDS["red"], GPIO.OUT)
 app = FlaskAPI(__name__)
 
 @app.route('/', methods=["GET"])
+print "root route hit", LEDS
 def api_root():
     return {
            "led_url": request.url + "led/(green | red)/",
@@ -19,6 +20,7 @@ def api_root():
     			 }
   
 @app.route('/led/<color>/', methods=["GET", "POST"])
+print "led route hit", LEDS
 def api_leds_control(color):
     if request.method == "POST":
         if color in LEDS:
